@@ -7,22 +7,31 @@ Per ogni utente si vuole salvare:
 - email aziendale (email)
 - se è esterno oppure no (bool)
 
-*/
+ */
 
 
 (function() {
-  'use strict';
+	'use strict';
 
-  angular
-    .module('engLabEvents')
-    .controller('registrazioneNuovoUtente', registrazioneNuovoUtente);
+	angular
+	.module('engLabEvents')
+	.controller('registrazioneNuovoUtente', registrazioneNuovoUtente);
 
-  registrazioneNuovoUtente.$inject = ['$rootScope'];
+	registrazioneNuovoUtente.$inject = ['$localStorage'];
 
-  /* @ngInject */
-  function registrazioneNuovoUtente($rootScope) {
-    var ctrl = this;
+	/* @ngInject */
+	function registrazioneNuovoUtente($localStorage) {
+		var ctrl = this;
+		/*
+			ATTRIBUTI
+		 */
+		ctrl.utente = {
+				nome:null,
+				cognome:null,
+				email:null,
+				password:null
 
+<<<<<<< HEAD
     /*
       ATTRIBUTI
     */
@@ -57,6 +66,51 @@ Per ogni utente si vuole salvare:
     function pulisci() {
       ctrl.utente = {};
     }
+=======
+		};
+		ctrl.utenti = $localStorage.utenti;
 
-  }
+
+
+
+
+		/*
+    Variabili di flusso
+		 */
+
+
+		/*
+      FUNZIONI
+		 */
+		ctrl.salva = salva;
+		ctrl.pulisci = pulisci;
+		ctrl.elimina = elimina;
+
+		function salva(){
+			ctrl.utente.id = Math.ceil(Math.random() * 100);
+			ctrl.utente.dataIscrizione = new Date();
+			ctrl.utenti.push(ctrl.utente);
+			ctrl.pulisci();
+			alert('Utente registrato correttamente!');
+		}
+
+		function pulisci() {
+			ctrl.utente = {};
+		}
+
+		function elimina(utente){
+			ctrl.utenti.splice(utente, 1);
+		}
+
+
+		function init(){
+			if (!$localStorage.utenti) {
+				$localStorage.utenti = [];
+			}
+				ctrl.utenti = $localStorage.utenti;
+		}
+		init();
+>>>>>>> avol-io/master
+
+	}
 })();

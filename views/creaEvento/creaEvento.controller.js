@@ -16,24 +16,25 @@ vincoliPartecipanti:{
                     max:intero
                   }
 }
-********************/
+ ********************/
 
 (function() {
-  'use strict';
+	'use strict';
 
-  angular
-    .module('engLabEvents')
-    .controller('creaEvento', creaEvento);
+	angular
+	.module('engLabEvents')
+	.controller('creaEvento', creaEvento);
 
-  creaEvento.$inject = ['$rootScope'];
+	creaEvento.$inject = ['$localStorage','$state'];
 
-  /* @ngInject */
-  function creaEvento($rootScope) {
-    var ctrl = this;
+	/* @ngInject */
+	function creaEvento($localStorage,$state) {
+		var ctrl = this;
 
 
-    /*
+		/*
       ATTRIBUTI
+<<<<<<< HEAD
      */
   
 
@@ -56,10 +57,36 @@ vincoliPartecipanti:{
     ctrl.visualizzaOpzioni = false;
     //visualizza vincoli su i partecipanti
     ctrl.visualizzaVincoli = false;
+=======
+		 */
 
 
-    /*
+		//l'evento che si vuole creare
+		ctrl.evento = {
+				nome: null, //stringa
+				data: new Date(), //data
+				luogo: null, //stringa
+				opzioni: [], //array di "Opzioni" {nome:stringa}
+				edit: false,
+				vincoliPartecipanti: {
+					min: null, //intero
+					max: null, //intero
+				}
+		};
+
+		/*
+    Variabili di flusso
+		 */
+		//visualizza opzioni
+		ctrl.visualizzaOpzioni = false;
+		//visualizza vincoli su i partecipanti
+		ctrl.visualizzaVincoli = false;
+>>>>>>> avol-io/master
+
+
+		/*
       FUNZIONI
+<<<<<<< HEAD
      */
     //salva l'evento
     ctrl.salva = salva;
@@ -119,22 +146,93 @@ vincoliPartecipanti:{
 
 
     /*
+=======
+		 */
+		//salva l'evento
+		ctrl.salva = salva;
+		//pulisce l'evento
+		ctrl.pulisci = pulisci;
+		//aggiungi opzione
+		ctrl.aggiungiOpzione = aggiungiOpzione;
+		//rimuovi opzione
+		ctrl.rimuoviOpzione = rimuoviOpzione;
+		//cambia la visualizzazione dell'opzioni
+		ctrl.cambiaVisualizzazioneOpzioni = cambiaVisualizzazioneOpzioni;
+		//cambia la visualizzazione dei vincoli
+		ctrl.alCambiamentoDelVincoloSuIPartecipanti = alCambiamentoDelVincoloSuIPartecipanti;
+
+		/**
+		 * Si occupa di gestire il salvataggio di un evento
+		 * @return void
+		 */
+		function salva() {
+			ctrl.evento.id = Math.ceil(Math.random() * 100);
+			ctrl.eventi.push(ctrl.evento);
+			alert('Evento Salvato');
+
+			console.log({id:ctrl.evento.id});
+			$state.go('visualizzaEvento',{id:ctrl.evento.id});
+			ctrl.pulisci();
+		}
+
+
+		/**
+		 * Si occupa di pulire il form resettando tutti i campi
+		 * @return void
+		 */
+		function pulisci() {
+			ctrl.evento = {};
+			ctrl.evento.opzioni=[];
+			ctrl.visualizzaOpzioni = false;
+			ctrl.visualizzaVincoli = false;
+		}
+
+		/**
+		 * Aggiunge un'opzione
+		 */
+		function aggiungiOpzione() {
+			ctrl.evento.opzioni.push({
+				'nome': ''
+			});
+		}
+
+		/*
+    Rimuove un opzione
+		 */
+		function rimuoviOpzione(opzione) {
+			for (var i = ctrl.evento.opzioni.length - 1; i >= 0; i--) {
+				if (ctrl.evento.opzioni[i].nome === opzione.nome) {
+					ctrl.evento.opzioni.splice(i, 1);
+				}
+			}
+		}
+
+		/*
+>>>>>>> avol-io/master
     Cambia visualizzazione
-    */
-    function cambiaVisualizzazioneOpzioni() {
-      if (ctrl.evento.opzioni.length === 0) {
-        ctrl.visualizzaOpzioni = !ctrl.visualizzaOpzioni;
-      }
-    }
+		 */
+		function cambiaVisualizzazioneOpzioni() {
+			if (ctrl.evento.opzioni.length === 0) {
+				ctrl.visualizzaOpzioni = !ctrl.visualizzaOpzioni;
+			}
+		}
 
-    /*
+		/*
     Pulisce i vincoli
-    */
-    function alCambiamentoDelVincoloSuIPartecipanti() {
-      ctrl.evento.vincoliPartecipanti.min =null;
-      ctrl.evento.vincoliPartecipanti.max=null;
-    }
+		 */
+		function alCambiamentoDelVincoloSuIPartecipanti() {
+			ctrl.evento.vincoliPartecipanti.min =null;
+			ctrl.evento.vincoliPartecipanti.max=null;
+		}
 
 
-  }
+		function init(){
+			if (!$localStorage.eventi) {
+				$localStorage.eventi = [];
+			}
+			ctrl.eventi=$localStorage.eventi;
+		}
+		init();
+
+	}
 })();

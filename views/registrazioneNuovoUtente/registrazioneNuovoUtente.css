@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 /*
 Crea Utente
@@ -13,12 +14,49 @@ body.creaUtente.rendimiBello  {
   order: 2;
 }
 .rendimiBello.creaUtente .contenutoPrincipale {
+=======
+/*.rendimiBello .contenutoPrincipale .registrazioneNuovoUtente button{
+	width:30px;
+	height:30px;
+	cursor:pointer;
+}*/
+
+.rendimiBello .contenutoPrincipale .registrazioneNuovoUtente .operazioni .salva {
+	background: transparent url("../../img/conferma.png") no-repeat ;
+	background-size: 30px 30px;
+
+}
+
+.rendimiBello .contenutoPrincipale .registrazioneNuovoUtente .utentiCreati .elimina {
+	background: transparent url("../../img/elimina.png") no-repeat ;
+	background-size: 30px 30px;
+
+}
+/*
+.rendimiBello .contenutoPrincipale .registrazioneNuovoUtente .utentiCreati .elencoUtenti {
+	border: 1px solid black;
+	width: 100%;
+
+}*/
+/*
+.rendimiBello .contenutoPrincipale .registrazioneNuovoUtente .utentiCreati .elencoUtenti td{
+	text-align: center;
+	border: 1px solid black;
+}*/
+/*
+.rendimiBello.registrazioneNuovoUtente .menu {
+  order: 2;
+}*/
+/*
+.rendimiBello.registrazioneNuovoUtente .contenutoPrincipale {
+>>>>>>> avol-io/master
   order: 1;
   display: flex;
   flex-flow: column nowrap;
   animation: 1.75s opacita;
 }
 
+<<<<<<< HEAD
 
 .rendimiBello .creaUtente .opzioni li {}
 .rendimiBello .creaUtente .opzioni label {
@@ -33,3 +71,10 @@ body.creaUtente.rendimiBello  {
   flex-grow: 1;
   height: 2.6rem;
 }
+=======
+body.registrazioneNuovoUtente.rendimiBello  {
+  padding-top: 100px;
+  background-position-y: -30px;
+  background-size: 550px;
+}*/
+>>>>>>> avol-io/master
